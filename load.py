@@ -11,6 +11,11 @@ from torchvision import transforms
 from torchvision.datasets import ImageNet, ImageFolder
 from imagenetv2_pytorch import ImageNetV2Dataset as ImageNetV2
 from datasets import _transform, CUBDataset
+from torchvision.datasets.food101 import Food101
+from torchvision.datasets.eurosat import EuroSAT
+from torchvision.datasets.places365 import Places365
+from torchvision.datasets.oxford_iiit_pet import OxfordIIITPet
+from torchvision.datasets.dtd import DTD
 from collections import OrderedDict
 import clip
 
@@ -20,7 +25,8 @@ from loading_helpers import *
 hparams = {}
 # hyperparameters
 
-hparams['model_size'] = "ViT-B/32" 
+hparams['model_size'] = "ViT-B/32"
+#hparams['model_size'] = "ViT-L/14@336px" 
 # Options:
 # ['RN50',
 #  'RN101',
@@ -31,9 +37,10 @@ hparams['model_size'] = "ViT-B/32"
 #  'ViT-B/16',
 #  'ViT-L/14',
 #  'ViT-L/14@336px']
-hparams['dataset'] = 'cub'
+#hparams['dataset'] = 'cub'
+hparams['dataset'] = 'food101'
 
-hparams['batch_size'] = 64*10
+hparams['batch_size'] = 64
 hparams['device'] = "cuda" if torch.cuda.is_available() else "cpu"
 hparams['category_name_inclusion'] = 'prepend' #'append' 'prepend'
 
@@ -76,6 +83,7 @@ hparams['descriptor_fname'] = None
 IMAGENET_DIR = '/proj/vondrick3/datasets/ImageNet/' # REPLACE THIS WITH YOUR OWN PATH
 IMAGENETV2_DIR = '/proj/vondrick/datasets/ImageNetV2/' # REPLACE THIS WITH YOUR OWN PATH
 CUB_DIR = '/home/y/yangxi/proj/visualrep/dataset/CUB_200_2011/' # REPLACE THIS WITH YOUR OWN PATH
+ROOT_DIR = '/home/y/yangxi/proj/visualrep/dataset/'
 
 # PyTorch datasets
 tfms = _transform(hparams['image_size'])
@@ -86,7 +94,7 @@ if hparams['dataset'] == 'imagenet':
     if hparams['dataset'] == 'imagenet':
         dsclass = ImageNet        
         hparams['data_dir'] = pathlib.Path(IMAGENET_DIR)
-        # train_ds = ImageNet(hparams['data_dir'], split='val', transform=train_tfms)
+        #train_ds = ImageNet(hparams['data_dir'], split='val', transform=train_tfms)
         dataset = dsclass(hparams['data_dir'], split='val', transform=tfms)
         classes_to_load = None
     
@@ -108,6 +116,40 @@ elif hparams['dataset'] == 'cub':
     classes_to_load = None #dataset.classes
     hparams['descriptor_fname'] = 'descriptors_cub'
 
+elif hparams['dataset'] == 'food101':
+    #load FOOD101 dataset
+    hparams['data_dir'] = pathlib.Path(ROOT_DIR)
+    dataset = Food101(hparams['data_dir'],transform=tfms)
+    classes_to_load = None #dataset.classes
+    hparams['descriptor_fname'] = 'descriptors_food101'
+
+elif hparams['dataset'] == 'eurosat':
+    #load EuroSAT dataset
+    hparams['data_dir'] = pathlib.Path(ROOT_DIR)
+    dataset = EuroSAT(hparams['data_dir'],transform=tfms)
+    classes_to_load = None #dataset.classes
+    hparams['descriptor_fname'] = 'descriptors_eurosat'
+
+elif hparams['dataset'] == 'places365':
+    #load OxfordIIITPet dataset
+    hparams['data_dir'] = pathlib.Path(ROOT_DIR)
+    dataset = Places365(hparams['data_dir'],download=True,transform=tfms)
+    classes_to_load = None #dataset.classes
+    hparams['descriptor_fname'] = 'descriptors_places365'
+
+elif hparams['dataset'] == 'oxford_iiit_pet':
+    #load OxfordIIITPet dataset
+    hparams['data_dir'] = pathlib.Path(ROOT_DIR)
+    dataset = OxfordIIITPet(hparams['data_dir'],transform=tfms)
+    classes_to_load = None #dataset.classes
+    hparams['descriptor_fname'] = 'descriptors_pets'
+
+elif hparams['dataset'] == 'dtd':
+    #load OxfordIIITPet dataset
+    hparams['data_dir'] = pathlib.Path(ROOT_DIR)
+    dataset = DTD(hparams['data_dir'],transform=tfms)
+    classes_to_load = None #dataset.classes
+    hparams['descriptor_fname'] = 'descriptors_dtd'
 
 hparams['descriptor_fname'] = './descriptors/' + hparams['descriptor_fname']
     

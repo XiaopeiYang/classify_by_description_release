@@ -74,6 +74,10 @@ class CUBDataset(datasets.ImageFolder):
             self.bboxes = None
 
     def __getitem__(self, index):
+        """
+        Returns a training sample based on an index
+        The training sample is the training pair consisting of x and y
+        """
         # generate one sample
         sample, target = super(CUBDataset, self).__getitem__(index)
 
@@ -93,9 +97,9 @@ class CUBDataset(datasets.ImageFolder):
             target = torch.tensor([target, x_rel, y_rel, w_rel, h_rel])
 
         if self.transform_ is not None:
-            sample = self.transform_(sample)
+            sample = self.transform_(sample) #Preprocess raw data
         if self.target_transform_ is not None:
-            target = self.target_transform_(target)
+            target = self.target_transform_(target) #Preprocess label/target
 
         return sample, target
     
