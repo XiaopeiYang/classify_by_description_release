@@ -38,9 +38,9 @@ hparams['model_size'] = "ViT-B/32"
 #  'ViT-L/14',
 #  'ViT-L/14@336px']
 #hparams['dataset'] = 'cub'
-hparams['dataset'] = 'food101'
+hparams['dataset'] = 'oxford_iiit_pet'
 
-hparams['batch_size'] = 64
+hparams['batch_size'] = 64*10
 hparams['device'] = "cuda" if torch.cuda.is_available() else "cpu"
 hparams['category_name_inclusion'] = 'prepend' #'append' 'prepend'
 
@@ -133,14 +133,14 @@ elif hparams['dataset'] == 'eurosat':
 elif hparams['dataset'] == 'places365':
     #load OxfordIIITPet dataset
     hparams['data_dir'] = pathlib.Path(ROOT_DIR)
-    dataset = Places365(hparams['data_dir'],download=True,transform=tfms)
+    dataset = Places365(hparams['data_dir'], small=True,transform=tfms)
     classes_to_load = None #dataset.classes
     hparams['descriptor_fname'] = 'descriptors_places365'
 
 elif hparams['dataset'] == 'oxford_iiit_pet':
     #load OxfordIIITPet dataset
     hparams['data_dir'] = pathlib.Path(ROOT_DIR)
-    dataset = OxfordIIITPet(hparams['data_dir'],transform=tfms)
+    dataset = OxfordIIITPet(hparams['data_dir'],split='test',transform=tfms)
     classes_to_load = None #dataset.classes
     hparams['descriptor_fname'] = 'descriptors_pets'
 

@@ -4,7 +4,7 @@
 
    * We use torchvision to download the dataset and change the file path to execute the program.
 
-   * For achitecture ViT-L/14, we change the batch size = 64*5; For architecture ViIT-L/14@336px, we change the batch size= 64. The reason is that we found the orginal batch size= 64*10 will cause the out of usable memory problem.
+   * For achitecture ViT-L/14, we change the batch size = 64\*5; For architecture ViIT-L/14@336px, we change the batch size= 64. The reason is that we found the orginal batch size= 64\*10 will cause the out of usable memory problem.
 
    * The dataset contains EuroSAT, Places365, Food101, Oxford Pets and Describable Textures. And we show the results as graphs below. 
 
@@ -23,7 +23,9 @@
 
 
 ## Places 365
-
+>|Architecture for $\phi$   | Ours | CLIP | $\Delta$ |
+>|-----------------------|------|--------|--------|
+>| ViT-B/32              | 40.01 | 37.68 | 2.33   |
 
 
 
