@@ -140,7 +140,7 @@ elif hparams['dataset'] == 'places365':
 elif hparams['dataset'] == 'oxford_iiit_pet':
     #load OxfordIIITPet dataset
     hparams['data_dir'] = pathlib.Path(ROOT_DIR)
-    dataset = OxfordIIITPet(hparams['data_dir'],split='test',transform=tfms)
+    dataset = OxfordIIITPet(hparams['data_dir'],transform=tfms)
     classes_to_load = None #dataset.classes
     hparams['descriptor_fname'] = 'descriptors_pets'
 
