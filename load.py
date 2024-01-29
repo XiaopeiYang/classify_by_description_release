@@ -21,7 +21,7 @@ import clip
 
 from loading_helpers import *
 
-from testpet import *
+
 
 hparams = {}
 # hyperparameters

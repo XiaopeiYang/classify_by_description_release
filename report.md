@@ -12,22 +12,22 @@
 * The dataset contains EuroSAT, Places365(uses the small images, i.e. resized to 256 x 256 pixels, instead of the high resolution ones.), Food101, Oxford Pets and Describable Textures. And we show the results as graphs below. 
 
 ## How to install and use datasets
-*Torchvision provides the required built-in datasets in the torchvision.datasets module, which we import into load.py.
-'''
+* Torchvision provides the required built-in datasets in the torchvision.datasets module, which we import into load.py.
+```
 from torchvision.datasets.food101 import Food101
 from torchvision.datasets.eurosat import EuroSAT
 from torchvision.datasets.places365 import Places365
 from torchvision.datasets.oxford_iiit_pet import OxfordIIITPet
 from torchvision.datasets.dtd import DTD
-'''
+```
 
-*add the following line in load.py to reflect the location of the data directory
-'''
+* add the following line in load.py to reflect the location of the data directory
+```
 ROOT_DIR = ''# REPLACE THIS WITH YOUR OWN PATH
-'''
+```
 
-*Here is the extended code in load.py to load different datasets based on the value of hparams['dataset']:
-'''
+* Here is the extended code in load.py to load different datasets based on the value of hparams['dataset']:
+```
 elif hparams['dataset'] == 'food101':
     #load FOOD101 dataset
     hparams['data_dir'] = pathlib.Path(ROOT_DIR)
@@ -62,7 +62,7 @@ elif hparams['dataset'] == 'dtd':
     dataset = DTD(hparams['data_dir'],download=True,split="test",transform=tfms,download=True)
     classes_to_load = None #dataset.classes
     hparams['descriptor_fname'] = 'descriptors_dtd'
-'''
+```
 
 
 
