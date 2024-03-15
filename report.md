@@ -119,6 +119,10 @@ elif hparams['dataset'] == 'dtd':
 >| ViT-L/14              | 55.05 | 50.85 | 4.2    |
 >| ViT-L/14@336px        | 55.00 | 51.06 | 3.94   |
 
+
+For the paper "Descriptor and Word Soups : Overcoming the Parameter Efficiency
+Accuracy Tradeoff for Out-of-Distribution Few-shot Learning": code https://github.com/Chris210634/word_soups.git
+
 |                            |   | source   |         |       |       |         |       |          |       |       |         |       |            |        |        |        |
 |----------------------------|---|----------|---------|-------|-------|---------|-------|----------|-------|-------|---------|-------|------------|--------|--------|--------|
 |                            |   | ImageNet | Caltech | Pets  | Cars  | Flowers | Food  | Aircraft | SUN   | DTD   | EuroSaT | UCF   | ImageNetV2 | Sketch | INET-A | INET-R |
